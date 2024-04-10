@@ -3,7 +3,7 @@ import java.util.List;
 
 public abstract class Course{
     protected String name;
-    protected int ID;
+    protected final int ID;
     protected int maxStudents;
     protected String type;
     protected List<Student> students;
