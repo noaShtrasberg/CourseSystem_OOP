@@ -59,25 +59,27 @@ public class CourseSystem {
     }
     public Course createCourseSystem(Staff staffMen, String n, int id, int max, String type){
         boolean newCourse = true;
-        for(int i=0 ; i<this.courses.size() ; i++){
-            if(id == this.courses.get(i).ID) {
-                newCourse = false;
-                System.out.println("This course is already exist");
+        Course exist = null;
+        if(staffMen.connect) {
+            for (int i = 0; i < this.courses.size(); i++) {
+                if (id == this.courses.get(i).ID) {
+                    newCourse = false;
+                    System.out.println("This course is already exist");
+                    exist = this.courses.get(i);
+                }
             }
-        }
-        if(newCourse){
-            if(staffMen.connect) {
+            if (newCourse) {
                 Course c = staffMen.createCourse(n, id, max, type);
-                if(c != null) {
+                if (c != null) {
                     this.courses.add(c);
-                    System.out.println("The course: " +c.name + " created successfully!");
+                    System.out.println("The course: " + c.name + " created successfully!");
                     return c;
                 }
             }
-            else
-                System.out.println("Cannot create courses if you are not connect. Please sign in");
         }
-        return null;
+        else
+            System.out.println("Cannot create courses if you are not connect. Please sign in");
+        return exist;
     }
 
 }
